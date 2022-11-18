@@ -2,6 +2,8 @@ import pygame
 import sys
 from grid import grid
 from time import sleep
+from player1 import Player1
+
 
 pygame.init()
 
@@ -20,6 +22,7 @@ tile_rect = grass.get_rect()
 
 #draw screen with background
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+player1 = Player1()
 
 w_loc = 0
 h_loc = 0
@@ -31,7 +34,7 @@ for row in grid:
         w_loc += TILE_SIZE
     h_loc += TILE_SIZE
     w_loc = 0
-
+#while loop that runs the game
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -40,7 +43,19 @@ while True:
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
                 sys.exit()
+            if event.key == pygame.K_d:
+                player1.moving_right = True
+            elif event.key == pygame.K_a:
+                player1.moving_left = True
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_d:
+                player1.moving_right = False
+            elif event.key == pygame.K_a:
+                player1.moving_left = False
 
 
+    player1.update()
+    
+    player1.draw()
     pygame.display.set_caption("Survive the Storm")
     pygame.display.flip()
