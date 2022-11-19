@@ -5,16 +5,16 @@ TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
 
-class Player1(Sprite):
+class Player2(Sprite):
     def __init__(self):
-        self.image = pygame.image.load("images/player1.png")
+        self.image = pygame.image.load("images/player2.png")
         self.rect = self.image.get_rect()
 
         # Store a decimal value for the ships horizontal position.
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
         #set where the player starts on the screen
-        self.y = 64
+        self.y = 448
 
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
@@ -41,4 +41,3 @@ class Player1(Sprite):
 
     def draw(self):
         self.screen.blit(self.image, self.rect)
-        
