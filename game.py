@@ -16,7 +16,7 @@ pygame.init()
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
-fan_frequency = .005
+
 
 #draw screen with background
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -25,6 +25,7 @@ player2 = Player2()
 fans = pygame.sprite.Group()
 bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
 
+fan_frequency = .005
 
 def _create_fan():
     """Create an alien, if conditions are right."""

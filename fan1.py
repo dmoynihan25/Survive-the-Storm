@@ -9,6 +9,7 @@ fan_frequency = .005
 
 class Fans(Sprite):
     def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
 
@@ -21,14 +22,13 @@ class Fans(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
         #set where the player starts on the screen
-        #self.y = 448
-        #self.x = 800
+        self.y = randint(0, WINDOW_HEIGHT)
+        self.x = WINDOW_WIDTH
 
 
-        fan_top_max = WINDOW_HEIGHT
-        self.rect.top = randint(0, fan_top_max)
 
-        self.rect.left = 800\
+
+
 
     def update(self):
         self.x -= self.speed
