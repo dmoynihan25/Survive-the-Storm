@@ -4,6 +4,9 @@ from grid import draw_background
 from time import sleep
 from player1 import Player1
 from player2 import Player2
+from fan1 import Fans
+from random import *
+from pygame.sprite import Sprite
 
 
 
@@ -13,12 +16,22 @@ pygame.init()
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
+fan_frequency = .005
 
 #draw screen with background
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 player1 = Player1()
 player2 = Player2()
+fans = pygame.sprite.Group()
 bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
+
+
+def _create_fan():
+    """Create an alien, if conditions are right."""
+    if random() < fan_frequency:
+        fan = Fans()
+        fans.add(fan)
+
 
 #while loop that runs the game
 while True:
@@ -75,6 +88,9 @@ while True:
     player1.draw()
     player2.update()
     player2.draw()
+    _create_fan()
+    fans.update()
+    fans.draw(screen)
 
     pygame.display.set_caption("Survive the Storm")
     pygame.display.flip()
