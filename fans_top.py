@@ -7,7 +7,7 @@ WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
 fan_frequency = .005
 
-class FansRight(Sprite):
+class FansTop(Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
@@ -22,8 +22,8 @@ class FansRight(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
         #set where the player starts on the screen
-        self.y = randint(0, WINDOW_HEIGHT)
-        self.x = WINDOW_WIDTH
+        self.y = 0
+        self.x = randint(0, WINDOW_WIDTH)
 
 
 
@@ -31,8 +31,8 @@ class FansRight(Sprite):
 
 
     def update(self):
-        self.x -= self.speed
-        #self.y += self.speed
+        #self.x -= self.speed
+        self.y += self.speed
 
         # Update rect object from self.x
         self.rect.x = self.x

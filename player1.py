@@ -20,6 +20,7 @@ class Player1(Sprite):
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
         self.speed = .2
+        #Speed goes negative
 
         self.moving_right = False
         self.moving_left = False
