@@ -41,6 +41,11 @@ class Player1(Sprite):
         self.rect.x = self.x
         self.rect.y = self.y
 
+        if self.speed <= 0:
+            self.speed = .04
+        if self.speed > .2:
+            self.speed = .2
+
     def draw(self):
         self.screen.blit(self.image, self.rect)
         

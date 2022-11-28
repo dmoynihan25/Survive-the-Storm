@@ -29,25 +29,30 @@ fans = pygame.sprite.Group()
 bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
 font = pygame.font.SysFont(None, 24)
 
-fan_frequency = .005
+fan_frequency = .004
 
 def _create_fan():
     """Create an alien, if conditions are right."""
     if random() < fan_frequency:
         fan_r = FansRight()
-        fan_t = FansTop
+        fan_t = FansTop()
 
 
         fans.add(fan_r)
-        #fans.add(fan_t)
+        fans.add(fan_t)
         #fans.add(fan_b)
 
+hit_time = 0
 
 def _check_player1_fan_collisions():
     collisions = pygame.sprite.spritecollide(player1, fans, True)
-    #when false, I get a bunch of ouchs printed. Since I only want one hit to register, i am going to kill the fans.
     if collisions:
-        player1.speed = player1.speed / 1.5
+        hit_time = pygame.time.get_ticks()
+        player1.speed -= .07
+    if pygame.time.get_ticks() - hit_time >= 2000:
+        player1.speed += .07
+
+        #player1.speed = player1.speed / 1.5
         #pygame.mixer.music.load(file)
         #pygame.mixer.music.play()
         #pygame.event.wait()
