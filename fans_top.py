@@ -1,6 +1,7 @@
 import pygame
 from pygame.sprite import Sprite
 from random import randint
+import math
 
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
@@ -21,18 +22,19 @@ class FansTop(Sprite):
         # Store a decimal value for the ships horizontal position.
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
+        self.theta = randint(75, 105)
         #set where the player starts on the screen
         self.y = 0
         self.x = randint(0, WINDOW_WIDTH)
 
 
-
-
+    def get_radians(self):
+        return self.theta * math.pi / 180
 
 
     def update(self):
-        #self.x -= self.speed
-        self.y += self.speed
+        self.x += self.speed * math.cos(self.get_radians())
+        self.y += self.speed * math.sin(self.get_radians())
 
         # Update rect object from self.x
         self.rect.x = self.x

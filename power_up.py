@@ -1,42 +1,33 @@
+
 import pygame
 from pygame.sprite import Sprite
-from random import randint
-import math
+
 
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
-fan_frequency = .005
 
-class FansRight(Sprite):
+class Drink(Sprite):
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
 
-        self.image = pygame.image.load("images/fan1.png")
+        self.image = pygame.image.load("images/drink.png")
+        self.image = pygame.transform.rotozoom(self.image, 0, 0.3)
         self.rect = self.image.get_rect()
 
-        self.speed = .2
 
         # Store a decimal value for the ships horizontal position.
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
-        self.theta = randint(-15, 15)
+
         #set where the player starts on the screen
-        self.y = randint(0, WINDOW_HEIGHT)
-        self.x = WINDOW_WIDTH
-
-
-
-    def get_radians(self):
-        return self.theta * math.pi / 180
+        self.y = ( WINDOW_HEIGHT / 2) - (self.rect.height / 2)
+        self.x = (WINDOW_WIDTH / 2) - (self.rect.width / 2)
 
 
     def update(self):
-        self.x -= self.speed * math.cos(self.get_radians())
-        self.y += self.speed * math.sin(self.get_radians())
-
         # Update rect object from self.x
         self.rect.x = self.x
         self.rect.y = self.y

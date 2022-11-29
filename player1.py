@@ -14,7 +14,7 @@ class Player1(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
         #set where the player starts on the screen
-        self.y = 64
+        self.y = 128
         self.x = 0
 
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
