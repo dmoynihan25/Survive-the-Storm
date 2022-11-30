@@ -1,7 +1,6 @@
 import pygame
 import sys
 from grid import draw_background
-from time import time
 from player1 import Player1
 from player2 import Player2
 from fan1 import FansRight
@@ -12,10 +11,10 @@ from power_up import Drink
 
 
 pygame.init()
-
+#load sound file
 file = 'impact1.mp3'
 
-#define grid
+#define grid and window size
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
@@ -23,13 +22,14 @@ WINDOW_HEIGHT = 8 * TILE_SIZE
 
 #draw screen with background
 screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
 
 #def player classes and fans
 player1 = Player1()
 player2 = Player2()
 drink = Drink()
 fans = pygame.sprite.Group()
-bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
+#def font
 font = pygame.font.SysFont(None, 24)
 
 
@@ -43,10 +43,12 @@ def _create_fan():
     """Create an alien, if conditions are right."""
     # Every tick a random numb between 0-1 is generated, if it is less than the assigned fan_freq value, a fan will spawn
     if random() < fan_frequency:
+        #assign variables for fan functions
         fan_r = FansRight()
         fan_t = FansTop()
         fan_b = FansBottom()
 
+        #add fans to each side
         fans.add(fan_r)
         fans.add(fan_t)
         fans.add(fan_b)
@@ -54,6 +56,7 @@ def _create_fan():
 
 def _check_player1_fan_collisions():
     collisions = pygame.sprite.spritecollide(player1, fans, True)
+    #allow hit time to be tracked
     global hit_time
     if collisions:
         # collision occurred, record hit time and slow player down
