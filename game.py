@@ -9,8 +9,6 @@ from fans_top import FansTop
 from fans_bottom import FansBottom
 from random import *
 from power_up import Drink
-from pygame.sprite import Sprite
-
 
 
 pygame.init()
@@ -31,8 +29,6 @@ player1 = Player1()
 player2 = Player2()
 drink = Drink()
 fans = pygame.sprite.Group()
-drinks = pygame.sprite.Group()
-
 bg = draw_background((WINDOW_WIDTH, WINDOW_HEIGHT))
 font = pygame.font.SysFont(None, 24)
 
@@ -45,7 +41,6 @@ hit_time2 = 0.0
 fan_frequency = .004
 def _create_fan():
     """Create an alien, if conditions are right."""
-    drinks.add(drink)
     # Every tick a random numb between 0-1 is generated, if it is less than the assigned fan_freq value, a fan will spawn
     if random() < fan_frequency:
         fan_r = FansRight()
@@ -88,23 +83,44 @@ def _check_player2_fan_collisions():
         player2.speed = 0.2
 
 def _check_player1_drink_collision():
-    collisions = pygame.sprite.spritecollide(player1, drink, True)
+    collisions = pygame.sprite.collide_rect(player1, drink)
     if collisions:
-        print('yum')
+        player1.speed += .1
+
+def _check_player2_drink_collision():
+    collisions = pygame.sprite.collide_rect(player2, drink)
+    if collisions:
+        player2.speed += .1
+
+score = 10000
+def timer():
+    global score
+    score -= 1
+    img = font.render(f'Score: {score/10}', True, (230, 230, 230))
+    img_rect = img.get_rect()
+    img_rect.topleft = screen.get_rect().topleft
+    screen.blit(img, img_rect)
+    pygame.display.flip()
+    #img2 = font.render(f"Time: {pygame.time.get_ticks} s", True, (255, 0, 0))
+    #img2_rect = img2.get_rect()
+    #img2_rect.topleft = screen.get_rect().topleft
+    #screen.blit(img2, img2_rect)
 
 def end_game_p1():
+    global score
     #function that ends the game and displays who won: player1 version
     screen.fill((100, 200, 100))
-    img = font.render(f'GAME OVER: Payer 1 Survived', True, (230, 230, 230))
+    img = font.render(f'GAME OVER: Payer 1 Survived. Score: {score/10}', True, (230, 230, 230))
     img_rect = img.get_rect()
     img_rect.center = screen.get_rect().center
     screen.blit(img, img_rect)
     pygame.display.flip()
 
 def end_game_p2():
+    global score
     #function that ends the game and displays who won: player2 version
     screen.fill((100, 200, 100))
-    img = font.render('GAME OVER: Payer 2 Survived', True, (230, 230, 230))
+    img = font.render(f'GAME OVER: Payer 2 Survived. Score: {score}', True, (230, 230, 230))
     img_rect = img.get_rect()
     img_rect.center = screen.get_rect().center
     screen.blit(img, img_rect)
@@ -174,13 +190,15 @@ while True:
     player2.update()
     player2.draw()
     _create_fan()
-    drinks.update()
-    drinks.draw(screen)
+    drink.update()
+    drink.draw()
     fans.update()
     fans.draw(screen)
-    _check_player1_fan_collisions()
-    _check_player2_fan_collisions()
+    #_check_player1_fan_collisions()
+    #_check_player2_fan_collisions()
     _check_player1_drink_collision()
+    _check_player2_drink_collision()
+    timer()
 
     pygame.display.set_caption("Survive the Storm")
     pygame.display.flip()
