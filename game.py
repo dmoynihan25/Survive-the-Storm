@@ -62,9 +62,8 @@ def _check_player1_fan_collisions():
         # collision occurred, record hit time and slow player down
         hit_time = pygame.time.get_ticks()
         player1.speed *= .5
-        # pygame.mixer.music.load(file)
-        # pygame.mixer.music.play()
-        # pygame.event.wait()
+        pygame.mixer.music.load(file)
+        pygame.mixer.music.play()
     if pygame.time.get_ticks() - hit_time >= 2000:
         # if slowing interval is over, speed player back up to full speed
         player1.speed = 0.2
@@ -78,9 +77,8 @@ def _check_player2_fan_collisions():
         # collision occurred, record hit time and slow player down
         hit_time2 = pygame.time.get_ticks()
         player2.speed *= .5
-        # pygame.mixer.music.load(file)
-        # pygame.mixer.music.play()
-        # pygame.event.wait()
+        pygame.mixer.music.load(file)
+        pygame.mixer.music.play()
     if pygame.time.get_ticks() - hit_time2 >= 2000:
         # if slowing interval is over, speed player back up to full speed
         player2.speed = 0.2
@@ -104,10 +102,6 @@ def timer():
     img_rect.topleft = screen.get_rect().topleft
     screen.blit(img, img_rect)
     pygame.display.flip()
-    #img2 = font.render(f"Time: {pygame.time.get_ticks} s", True, (255, 0, 0))
-    #img2_rect = img2.get_rect()
-    #img2_rect.topleft = screen.get_rect().topleft
-    #screen.blit(img2, img2_rect)
 
 def end_game_p1():
     global score
@@ -197,8 +191,8 @@ while True:
     drink.draw()
     fans.update()
     fans.draw(screen)
-    #_check_player1_fan_collisions()
-    #_check_player2_fan_collisions()
+    _check_player1_fan_collisions()
+    _check_player2_fan_collisions()
     _check_player1_drink_collision()
     _check_player2_drink_collision()
     timer()
