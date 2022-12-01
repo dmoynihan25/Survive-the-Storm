@@ -1,13 +1,14 @@
 import pygame
 from pygame.sprite import Sprite
 
+#set settings, same for all
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
 WINDOW_HEIGHT = 8 * TILE_SIZE
 
 class Drink(Sprite):
     def __init__(self):
-
+        #load image and get the rect for it
         self.image = pygame.image.load("images/drink.png")
         self.image = pygame.transform.rotozoom(self.image, 0, 0.3)
         self.rect = self.image.get_rect()
@@ -20,6 +21,7 @@ class Drink(Sprite):
         self.y = (WINDOW_HEIGHT / 2) - (self.rect.height / 2)
         self.x = (WINDOW_WIDTH / 2) - (self.rect.width / 2)
 
+        #set screen bounds
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
 
@@ -29,4 +31,5 @@ class Drink(Sprite):
         self.rect.y = self.y
 
     def draw(self):
+        """Draws the power up to the screen"""
         self.screen.blit(self.image, self.rect)
