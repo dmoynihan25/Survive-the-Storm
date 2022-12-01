@@ -76,7 +76,9 @@ def _check_player2_fan_collisions():
     if collisions:
         # collision occurred, record hit time and slow player down
         hit_time2 = pygame.time.get_ticks()
+        #half player speed
         player2.speed *= .5
+        #play sound to indicated that player is injured
         pygame.mixer.music.load(file)
         pygame.mixer.music.play()
     if pygame.time.get_ticks() - hit_time2 >= 2000:
@@ -84,19 +86,27 @@ def _check_player2_fan_collisions():
         player2.speed = 0.2
 
 def _check_player1_drink_collision():
+    #check to see if the rects of the player and the drink have overlapped, does not kill power up
     collisions = pygame.sprite.collide_rect(player1, drink)
     if collisions:
+        #if they are, add to player speed, player speed limited to three
         player1.speed += .1
 
 def _check_player2_drink_collision():
+    # check to see if the rects of the player and the drink have overlapped, does not kill power up
     collisions = pygame.sprite.collide_rect(player2, drink)
     if collisions:
+        # if they are, add to player speed, player speed limited to three
         player2.speed += .1
 
+#save score
 score = 10000
 def timer():
+    """Function that starts with a score then subtracts as time goes"""
     global score
+    #for every tick subtract 1 from the score
     score -= 1
+    #display the score in the top left, changes every refresh, dynamic
     img = font.render(f'Score: {score/10}', True, (230, 230, 230))
     img_rect = img.get_rect()
     img_rect.topleft = screen.get_rect().topleft
@@ -104,10 +114,11 @@ def timer():
     pygame.display.flip()
 
 def end_game_p1():
+    """function that ends the game and displays who won: player1 version"""
+    #allow the score to be displayed
     global score
-    #function that ends the game and displays who won: player1 version
     screen.fill((100, 200, 100))
-    img = font.render(f'GAME OVER: Payer 1 Survived. Score: {score/10}', True, (230, 230, 230))
+    img = font.render(f'GAME OVER: Player 1 Survived. Score: {score/10}', True, (230, 230, 230))
     img_rect = img.get_rect()
     img_rect.center = screen.get_rect().center
     screen.blit(img, img_rect)
@@ -115,9 +126,9 @@ def end_game_p1():
 
 def end_game_p2():
     global score
-    #function that ends the game and displays who won: player2 version
+    """function that ends the game and displays who won: player2 version"""
     screen.fill((100, 200, 100))
-    img = font.render(f'GAME OVER: Payer 2 Survived. Score: {score}', True, (230, 230, 230))
+    img = font.render(f'GAME OVER: Player 2 Survived. Score: {score}', True, (230, 230, 230))
     img_rect = img.get_rect()
     img_rect.center = screen.get_rect().center
     screen.blit(img, img_rect)
@@ -175,9 +186,11 @@ while True:
                 player2.moving_down = False
     #if statement that checks for player x to see if they made it to the endzone
     if player1.rect.x == 768:
+        #if the player reaches, display the end screen for player 1
         end_game_p1()
         continue
     if player2.rect.x == 768:
+        # if the player reaches, display the end screen for player 1
         end_game_p2()
         continue
 
