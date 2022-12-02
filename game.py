@@ -146,9 +146,11 @@ playsound = True
 while True:
     #a tick rate of 60 was VERY slow but this seemed to work
     clock.tick(1000)
+
     #since the flag is true, this if statement runs
     if playsound:
         #load and play the sound that is continuos
+        #Finn Prescott helped me with this
         crowd = pygame.mixer.Sound(file2)
         pygame.mixer.Sound.play(crowd)
         #after the sound plays, set the flag to false to it does not run again, and the sound only plays once
