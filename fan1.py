@@ -13,7 +13,7 @@ class FansRight(Sprite):
     def __init__(self):
         #inits the sprite settings, collisions do not work without this
         pygame.sprite.Sprite.__init__(self)
-        #set screen bounds
+        #set screen settings
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
 
@@ -28,7 +28,7 @@ class FansRight(Sprite):
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
         self.theta = randint(-15, 15)
-        #set where the player starts on the screen, all start the on the left side, but random where they spawn on the y axis
+        #set where the fan starts on the screen, all start the on the left side, but random where they spawn on the y axis
         self.y = randint(0, WINDOW_HEIGHT)
         self.x = WINDOW_WIDTH
 
@@ -44,6 +44,6 @@ class FansRight(Sprite):
         self.x -= self.speed * math.cos(self.get_radians())
         self.y += self.speed * math.sin(self.get_radians())
 
-        # Update rect object from self.x
+        # Update rect object from self.x and y
         self.rect.x = self.x
         self.rect.y = self.y

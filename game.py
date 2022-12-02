@@ -193,7 +193,7 @@ while True:
         # if the player reaches, display the end screen for player 1
         end_game_p2()
         continue
-
+    #functions run while the while loop is true
     screen.blit(bg, bg.get_rect())
     player1.update()
     player1.draw()
@@ -211,4 +211,5 @@ while True:
     timer()
 
     pygame.display.set_caption("Survive the Storm")
+    #monkeys flip the painting
     pygame.display.flip()

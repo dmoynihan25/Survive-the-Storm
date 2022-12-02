@@ -18,7 +18,7 @@ class Player1(Sprite):
         #set where the player starts on the screen
         self.y = 128
         self.x = 0
-        #set the screen bounds for the player
+        #set the screen settings for the player
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
 
@@ -51,7 +51,8 @@ class Player1(Sprite):
             self.speed = .04
         if self.speed > .3:
             self.speed = .3
-    #draw the player
+
     def draw(self):
+        """Function to draw the player"""
         self.screen.blit(self.image, self.rect)
         
