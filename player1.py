@@ -48,7 +48,7 @@ class Player1(Sprite):
 
         #limit the speed range so it does not go negative
         if self.speed <= 0:
-            self.speed = .04
+            self.speed = .2
         if self.speed > .3:
             self.speed = .3
 

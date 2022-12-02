@@ -9,10 +9,15 @@ from fans_bottom import FansBottom
 from random import *
 from power_up import Drink
 
-
+#init pygame
 pygame.init()
+
+#set clock variable
+clock = pygame.time.Clock()
+
 #load sound file
 file = 'impact1.mp3'
+file2 = 'crowd.mp3'
 
 #define grid and window size
 TILE_SIZE = 64
@@ -29,8 +34,8 @@ player1 = Player1()
 player2 = Player2()
 drink = Drink()
 fans = pygame.sprite.Group()
-#def font
-font = pygame.font.SysFont(None, 24)
+#def font, special font
+font = pygame.font.SysFont("Segoe UI", 24)
 
 
 # initialize hit time for p1 and p2
@@ -62,8 +67,8 @@ def _check_player1_fan_collisions():
         # collision occurred, record hit time and slow player down
         hit_time = pygame.time.get_ticks()
         player1.speed *= .5
-        pygame.mixer.music.load(file)
-        pygame.mixer.music.play()
+        impact = pygame.mixer.Sound(file)
+        pygame.mixer.Sound.play(impact)
     if pygame.time.get_ticks() - hit_time >= 2000:
         # if slowing interval is over, speed player back up to full speed
         player1.speed = 0.2
@@ -79,8 +84,8 @@ def _check_player2_fan_collisions():
         #half player speed
         player2.speed *= .5
         #play sound to indicated that player is injured
-        pygame.mixer.music.load(file)
-        pygame.mixer.music.play()
+        impact = pygame.mixer.Sound(file)
+        pygame.mixer.Sound.play(impact)
     if pygame.time.get_ticks() - hit_time2 >= 2000:
         # if slowing interval is over, speed player back up to full speed
         player2.speed = 0.2
@@ -134,10 +139,21 @@ def end_game_p2():
     screen.blit(img, img_rect)
     pygame.display.flip()
 
-
+#set flag for playing a continuos sound
+playsound = True
 
 #while loop that runs the game
 while True:
+    #a tick rate of 60 was VERY slow but this seemed to work
+    clock.tick(1000)
+    #since the flag is true, this if statement runs
+    if playsound:
+        #load and play the sound that is continuos
+        crowd = pygame.mixer.Sound(file2)
+        pygame.mixer.Sound.play(crowd)
+        #after the sound plays, set the flag to false to it does not run again, and the sound only plays once
+        playsound = False
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
@@ -209,6 +225,7 @@ while True:
     _check_player1_drink_collision()
     _check_player2_drink_collision()
     timer()
+    #pygame.time.Clock.tick(60)
 
     pygame.display.set_caption("Survive the Storm")
     #monkeys flip the painting

@@ -23,7 +23,7 @@ class Player2(Sprite):
         self.screen = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
         self.screen_rect = self.screen.get_rect()
         #player speed
-        self.speed = .2
+        self.speed = 10
         #movement flags
         self.moving_right = False
         self.moving_left = False
@@ -46,9 +46,9 @@ class Player2(Sprite):
         self.rect.y = self.y
         # limit the speed range so it does not go negative
         if self.speed <= 0:
-            self.speed = .04
-        if self.speed > .3:
-            self.speed = .3
+            self.speed = 2
+        if self.speed > 13:
+            self.speed = 13
 
     def draw(self):
         """Function to draw the player"""
