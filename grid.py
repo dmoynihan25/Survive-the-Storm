@@ -1,5 +1,5 @@
 import pygame
-
+#TILER
 #set tile size
 TILE_SIZE = 64
 #each digit represents a tile, and the number represents the image that will loaded for that tile

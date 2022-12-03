@@ -26,6 +26,7 @@ class FansTop(Sprite):
         # Store a decimal value for the ships horizontal position.
         self.x = float(self.rect.x)
         self.y = float(self.rect.y)
+        #randomize the angle which fans are crossing the field. TRICKY TRIG
         self.theta = randint(75, 105)
         #set where the fans starts on the screen, all start at the top of the screen, but spawn randomly along the x axis
         self.y = 0

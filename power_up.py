@@ -1,6 +1,6 @@
 import pygame
 from pygame.sprite import Sprite
-
+#Healthy Eater
 #set settings, same for all
 TILE_SIZE = 64
 WINDOW_WIDTH = 14 * TILE_SIZE
@@ -10,6 +10,7 @@ class Drink(Sprite):
     def __init__(self):
         #load image and get the rect for it
         self.image = pygame.image.load("images/drink.png")
+        #shrink the image
         self.image = pygame.transform.rotozoom(self.image, 0, 0.3)
         self.rect = self.image.get_rect()
 

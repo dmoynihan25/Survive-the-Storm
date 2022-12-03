@@ -34,7 +34,7 @@ player1 = Player1()
 player2 = Player2()
 drink = Drink()
 fans = pygame.sprite.Group()
-#def font, special font
+#def font, FANCY FONTS
 font = pygame.font.SysFont("Segoe UI", 24)
 
 
@@ -67,6 +67,7 @@ def _check_player1_fan_collisions():
         # collision occurred, record hit time and slow player down
         hit_time = pygame.time.get_ticks()
         player1.speed *= .5
+        #load and play collision sound, SOUND BLASTER
         impact = pygame.mixer.Sound(file)
         pygame.mixer.Sound.play(impact)
     if pygame.time.get_ticks() - hit_time >= 2000:
@@ -83,7 +84,7 @@ def _check_player2_fan_collisions():
         hit_time2 = pygame.time.get_ticks()
         #half player speed
         player2.speed *= .5
-        #play sound to indicated that player is injured
+        #load and play collision sound, SOUND BLASTER
         impact = pygame.mixer.Sound(file)
         pygame.mixer.Sound.play(impact)
     if pygame.time.get_ticks() - hit_time2 >= 2000:
@@ -107,11 +108,11 @@ def _check_player2_drink_collision():
 #save score
 score = 10000
 def timer():
-    """Function that starts with a score then subtracts as time goes"""
+    """Function that starts with a score then subtracts as time goes. TICK TOK."""
     global score
     #for every tick subtract 1 from the score
     score -= 1
-    #display the score in the top left, changes every refresh, dynamic
+    #display the score in the top left, changes every refresh, TEXTUAL
     img = font.render(f'Score: {score/10}', True, (230, 230, 230))
     img_rect = img.get_rect()
     img_rect.topleft = screen.get_rect().topleft
@@ -119,7 +120,7 @@ def timer():
     pygame.display.flip()
 
 def end_game_p1():
-    """function that ends the game and displays who won: player1 version"""
+    """function that ends the game and displays who won: player1 version. SHIFTING SCREENS"""
     #allow the score to be displayed
     global score
     screen.fill((100, 200, 100))
@@ -131,7 +132,7 @@ def end_game_p1():
 
 def end_game_p2():
     global score
-    """function that ends the game and displays who won: player2 version"""
+    """function that ends the game and displays who won: player2 version. SHIFTING SCREENS"""
     screen.fill((100, 200, 100))
     img = font.render(f'GAME OVER: Player 2 Survived. Score: {score}', True, (230, 230, 230))
     img_rect = img.get_rect()
@@ -149,7 +150,7 @@ while True:
 
     #since the flag is true, this if statement runs
     if playsound:
-        #load and play the sound that is continuos
+        #load and play the sound that is continuos, MUZAK
         #Finn Prescott helped me with this
         crowd = pygame.mixer.Sound(file2)
         pygame.mixer.Sound.play(crowd)
@@ -159,11 +160,11 @@ while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
-        #check for keydown events
+        #check for keydown events, KEYBOARD KING
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_q:
                 sys.exit()
-            #PLAYER 1 ON FLAGS
+            #PLAYER 1 ON FLAGS, MULTIPLAYER
             if event.key == pygame.K_d:
                 player1.moving_right = True
             elif event.key == pygame.K_a:
@@ -172,7 +173,7 @@ while True:
                 player1.moving_up = True
             elif event.key == pygame.K_s:
                 player1.moving_down = True
-            #PLAYER 2 ON FLAGS
+            #PLAYER 2 ON FLAGS, MULTIPLAYER
             elif event.key == pygame.K_RIGHT:
                 player2.moving_right = True
             elif event.key == pygame.K_LEFT:
